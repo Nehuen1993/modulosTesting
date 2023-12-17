@@ -1,0 +1,131 @@
+paths:
+  /api/sessions/agregar:
+    post:
+      summary: Agrega productos
+      tags:
+        - Producto
+      requestBody:
+        description: Datos del producto a agregar al listado
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: nombre
+                categoria:
+                  type: string
+                  description: categoria
+                precio:
+                  type: number
+                  description: precio
+                stock:
+                  type: number
+                  description: stock
+                imagen:
+                  type: string
+                  description: imagen
+      parameters:
+        - in: path
+          name: userEmail
+          required: true
+          description: ID del usuario que agrega producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Producto Agregado"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/product.js'
+        "500":
+          description: "Error interno del servidor"
+
+  /api/sessions/update:
+    put:
+      summary: Actualizar productos
+      tags:
+        - Producto
+      requestBody:
+        description: Datos del producto a Actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: nombre
+                categoria:
+                  type: string
+                  description: categoria
+                precio:
+                  type: number
+                  description: precio
+                stock:
+                  type: number
+                  description: stock
+                imagen:
+                  type: string
+                  description: imagen
+                id:
+                  type: string
+                  description: id
+      responses:
+        "200":
+          description: "Producto Actualizado"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/product.js'
+        "500":
+          description: "Error interno del servidor"
+
+/api/sessions/delete:
+    delete:
+      summary: Eliminar productos
+      tags:
+        - Producto
+      requestBody:
+        description: Datos del producto a agregar al carrito
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: id
+      parameters:
+        - in: path
+          name: userEmail
+          required: true
+          description: mail del usuario que elimina producto
+          schema:
+            type: string
+        - in: path
+          name: isPremium
+          required: true
+          description: elimina productos un premium
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: "Producto Agregado"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/product.js'
+        "500":
+          description: "Error interno del servidor"

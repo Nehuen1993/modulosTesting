@@ -1,0 +1,43 @@
+    {{!-- <form action="nuevaClave" method="POST">
+        
+
+        <label for="nuevaClave">Introdusca nueva clave</label>
+        <input type="text" name="clave" required>
+
+        <label for="nuevaClave2">Repita la clave</label>
+        <input type="text" name="clave2" required>
+
+
+        <button type="submit">Cambiar Clave</button>
+
+    </form> --}}
+
+<form id="formNuevaClave" action="/api/sessions/nuevaClave/<%= token %>" method="POST">
+    <label for="nuevaClave">Introduce nueva clave</label>
+    <input type="password" name="newPassword" id="nuevaClave" required>
+
+    <label for="nuevaClave2">Repite la clave</label>
+    <input type="password" name="confirmPassword" id="nuevaClave2" required>
+
+    <button type="submit">Cambiar Clave</button>
+</form>
+
+<script>
+document.getElementById('formNuevaClave').addEventListener('submit', function(event) {
+    const newPassword = document.getElementById('nuevaClave').value;
+    const confirmPassword = document.getElementById('nuevaClave2').value;
+
+    if (newPassword !== confirmPassword) {
+        alert('Las claves no coinciden. Por favor, reinténtalo.');
+        event.preventDefault();
+    } else {
+        // Obtén el token de la URL
+        const url = window.location.href;
+        const token = url.substring(url.lastIndexOf('/') + 1);
+
+        // Actualiza la acción del formulario con el token
+        document.getElementById('formNuevaClave').action = `/api/sessions/nuevaClave/${token}`;
+    }
+});
+
+</script>

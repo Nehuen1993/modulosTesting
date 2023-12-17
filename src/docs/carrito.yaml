@@ -1,0 +1,86 @@
+paths:
+  /api/sessions/carrito:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Carrito
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: ID del usuario para obtener su carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Lista de productos"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/carrito.js'
+        "500":
+          description: "Error interno del servidor"
+        
+  /api/sessions/agregarCarrito:
+    post:
+      summary: Agrega un producto al carrito
+      tags:
+        - Carrito
+      requestBody:
+        description: Datos del producto a agregar al carrito
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pid:
+                  type: string
+                  description: ID del producto a agregar al carrito
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: ID del usuario que agrega un producto al carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Producto agregado al carrito"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/carrito.js'
+        "500":
+          description: "Error interno del servidor"
+
+  /api/sessions/correo:
+    post:
+      summary: Enviar correo de compra
+      tags:
+        - Carrito
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: ID del usuario para enviar el correo
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Correo de envio de compra"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './src/dao/mongo/models/carrito.js'
+        "500":
+          description: "Error interno del servidor"
+
+
+
