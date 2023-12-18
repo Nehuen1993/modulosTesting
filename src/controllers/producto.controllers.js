@@ -98,7 +98,7 @@ export const postAgregar = async (req, res) => {
               const result = await productos.updateOne({ _id: id }, { nombre, categoria, precio, stock, imagen });
               
           
-              res.status(200).send({ status: 'success', message: 'Producto actualizado con éxito' });
+              res.status(200).send({ status: 'success', message: 'Producto actualizado con éxito'});
             } catch (error) {
               console.log(error);
               res.status(500).send({ status: "error", error: "Error al actualizar el producto" });

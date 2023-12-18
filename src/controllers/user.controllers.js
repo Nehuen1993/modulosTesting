@@ -44,7 +44,7 @@ export const postLogin = async (req, res) => {
     if (!isValidatePassword(user, password)) {
         return res.status(401).render("login", { error: "Error en password" });
     }
-    console.log (user)
+    
 
     req.session.user = {
         first_name: user.first_name,
@@ -57,13 +57,13 @@ export const postLogin = async (req, res) => {
         id: user._id
     };
 
-    
+    console.log (user)
 
     if (user.isAdmin == true || user.isPremium == true) {
         res.redirect("/api/sessions/admin");
         
     } else {
-        res.redirect("/api/sessions/producto");;
+        res.redirect("/api/sessions/producto");
         
     }
     
@@ -89,7 +89,8 @@ export const postRegister = async (req, res) => {
   });
 
     console.log('Usuario registrado con éxito.' + user);
-    res.redirect('/api/sessions/login');
+    res.status(200).send({ status: 'success', message: 'Producto actualizado con éxito'}).redirect('/api/sessions/login')
+
     
 }
 
